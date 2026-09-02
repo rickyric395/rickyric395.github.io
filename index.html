@@ -1,0 +1,268 @@
+<style>
+  :root {
+    --ground: #F4F5F3; --surface: #FFFFFF; --surface-2: #EEF1EF; --border: #E1E5E2;
+    --border-strong: #CDD4D0; --ink: #171C1B; --ink-soft: #3C4442; --muted: #5E6663;
+    --accent: #0E8F86; --accent-ink: #0A6E67; --accent-wash: #E2F0EE;
+    --gold: #B0791A;
+    --shadow: 0 1px 2px rgba(20,30,28,.04), 0 10px 30px rgba(20,30,28,.06);
+    --mono: ui-monospace, "SF Mono", "JetBrains Mono", Menlo, Consolas, monospace;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, Roboto, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --ground: #0E1413; --surface: #16201E; --surface-2: #1C2724; --border: #263330;
+      --border-strong: #384843; --ink: #E9EEEC; --ink-soft: #C2CCC8; --muted: #8E9B96;
+      --accent: #48CFC4; --accent-ink: #60D9CE; --accent-wash: #16302C; --gold: #E0AC52;
+      --shadow: 0 1px 2px rgba(0,0,0,.3), 0 12px 34px rgba(0,0,0,.4);
+    }
+  }
+  :root[data-theme="light"] {
+    --ground: #F4F5F3; --surface: #FFFFFF; --surface-2: #EEF1EF; --border: #E1E5E2;
+    --border-strong: #CDD4D0; --ink: #171C1B; --ink-soft: #3C4442; --muted: #5E6663;
+    --accent: #0E8F86; --accent-ink: #0A6E67; --accent-wash: #E2F0EE; --gold: #B0791A;
+    --shadow: 0 1px 2px rgba(20,30,28,.04), 0 10px 30px rgba(20,30,28,.06);
+  }
+  :root[data-theme="dark"] {
+    --ground: #0E1413; --surface: #16201E; --surface-2: #1C2724; --border: #263330;
+    --border-strong: #384843; --ink: #E9EEEC; --ink-soft: #C2CCC8; --muted: #8E9B96;
+    --accent: #48CFC4; --accent-ink: #60D9CE; --accent-wash: #16302C; --gold: #E0AC52;
+    --shadow: 0 1px 2px rgba(0,0,0,.3), 0 12px 34px rgba(0,0,0,.4);
+  }
+
+  * { box-sizing: border-box; }
+  body { margin: 0; }
+  .page { background: var(--ground); color: var(--ink); font-family: var(--sans); font-size: 16px; line-height: 1.62; -webkit-font-smoothing: antialiased; }
+  a { color: var(--accent-ink); text-underline-offset: 2px; }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+
+  .wrap { max-width: 900px; margin: 0 auto; padding: 0 clamp(20px, 5vw, 44px); }
+  .eyebrow { font-family: var(--mono); font-size: 11.5px; letter-spacing: .18em; text-transform: uppercase; color: var(--accent-ink); margin: 0; }
+  .mono { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+
+  /* hero */
+  .hero { padding: clamp(52px, 9vw, 92px) 0 34px; border-bottom: 1px solid var(--border); }
+  .hero .name { font-size: clamp(40px, 8vw, 76px); line-height: .98; letter-spacing: -.035em; font-weight: 800; margin: 14px 0 0; }
+  .hero .wedge { font-size: clamp(18px, 2.6vw, 24px); line-height: 1.32; color: var(--ink-soft); margin: 20px 0 0; max-width: 30ch; font-weight: 500; text-wrap: balance; }
+  .hero .wedge b { color: var(--ink); }
+  .hero .wedge .u { color: var(--accent-ink); border-bottom: 2px solid color-mix(in srgb, var(--accent) 45%, transparent); }
+  .sub { margin: 18px 0 0; color: var(--muted); font-size: 15px; max-width: 60ch; }
+
+  .proof { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; margin: 34px 0 0; background: var(--border); border: 1px solid var(--border); border-radius: 14px; overflow: hidden; }
+  .proof .cell { background: var(--surface); padding: 16px 16px; }
+  .proof .v { font-family: var(--mono); font-size: clamp(19px, 3vw, 26px); font-variant-numeric: tabular-nums; letter-spacing: -.02em; color: var(--accent-ink); line-height: 1; }
+  .proof .l { font-size: 11.5px; color: var(--muted); margin-top: 7px; line-height: 1.3; }
+
+  .links { display: flex; flex-wrap: wrap; gap: 10px; margin: 26px 0 0; }
+  .btn { font-family: var(--mono); font-size: 12.5px; letter-spacing: .03em; text-decoration: none; padding: 9px 15px; border-radius: 9px; border: 1px solid var(--border-strong); color: var(--ink); background: var(--surface); display: inline-flex; align-items: center; gap: 7px; transition: border-color .15s, background .15s; }
+  .btn:hover { border-color: var(--accent); background: var(--accent-wash); }
+  .btn.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+  @media (prefers-color-scheme: dark) { .btn.primary { color: #0B1615; } }
+  :root[data-theme="dark"] .btn.primary { color: #0B1615; }
+  .btn .tag { font-size: 9px; opacity: .7; letter-spacing: .08em; text-transform: uppercase; }
+
+  section.blk { padding: clamp(40px, 6vw, 60px) 0; border-bottom: 1px solid var(--border); }
+  .shead { display: flex; align-items: baseline; gap: 12px; margin: 0 0 26px; }
+  .shead h2 { font-size: clamp(20px, 3vw, 27px); letter-spacing: -.02em; margin: 0; font-weight: 700; }
+  .shead .idx { font-family: var(--mono); font-size: 12px; color: var(--muted); letter-spacing: .1em; }
+
+  /* principles */
+  .princ { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .p { background: var(--surface); border: 1px solid var(--border); border-radius: 13px; padding: 18px 20px; box-shadow: var(--shadow); }
+  .p h3 { margin: 0 0 5px; font-size: 15.5px; letter-spacing: -.01em; display: flex; align-items: baseline; gap: 8px; }
+  .p h3 .n { font-family: var(--mono); font-size: 11px; color: var(--accent-ink); }
+  .p p { margin: 0; font-size: 13.8px; color: var(--muted); line-height: 1.5; }
+
+  /* case studies */
+  .cs { background: var(--surface); border: 1px solid var(--border); border-radius: 15px; padding: clamp(20px, 3vw, 28px); box-shadow: var(--shadow); margin-bottom: 16px; }
+  .cs .top { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; flex-wrap: wrap; }
+  .cs .eyebrow { color: var(--muted); }
+  .cs.flag .eyebrow { color: var(--accent-ink); }
+  .cs h3 { font-size: clamp(18px, 2.4vw, 22px); letter-spacing: -.018em; margin: 7px 0 0; font-weight: 700; text-wrap: balance; max-width: 24ch; }
+  .cs .impact-badge { font-family: var(--mono); font-size: 13px; font-variant-numeric: tabular-nums; color: var(--accent-ink); background: var(--accent-wash); border: 1px solid color-mix(in srgb, var(--accent) 30%, transparent); padding: 7px 12px; border-radius: 9px; white-space: nowrap; font-weight: 600; }
+  .rows { margin: 18px 0 0; display: grid; gap: 11px; }
+  .row { display: grid; grid-template-columns: 104px 1fr; gap: 14px; align-items: start; }
+  .row .k { font-family: var(--mono); font-size: 10.5px; letter-spacing: .09em; text-transform: uppercase; color: var(--muted); padding-top: 2px; }
+  .row .val { font-size: 14px; color: var(--ink-soft); line-height: 1.5; }
+  .row.impact .k { color: var(--accent-ink); }
+  .row.impact .val { color: var(--ink); font-weight: 500; }
+  .row .val .n { font-family: var(--mono); font-variant-numeric: tabular-nums; color: var(--accent-ink); font-weight: 600; }
+
+  /* building */
+  .build { background: var(--accent-wash); border: 1px solid color-mix(in srgb, var(--accent) 26%, transparent); border-radius: 15px; padding: clamp(20px,3vw,26px); }
+  .build h2 { margin: 0 0 6px; font-size: 20px; letter-spacing: -.015em; }
+  .build p { margin: 0 0 14px; color: var(--ink-soft); font-size: 14.5px; max-width: 64ch; }
+  .build .items { display: grid; gap: 10px; }
+  .bi { display: flex; gap: 12px; align-items: baseline; font-size: 14px; }
+  .bi .st { font-family: var(--mono); font-size: 10px; letter-spacing: .06em; text-transform: uppercase; padding: 2px 7px; border-radius: 6px; flex: none; }
+  .bi .st.now { color: var(--accent-ink); background: var(--surface); border: 1px solid color-mix(in srgb, var(--accent) 30%, transparent); }
+  .bi .st.next { color: var(--gold); background: var(--surface); border: 1px solid color-mix(in srgb, var(--gold) 34%, transparent); }
+  .bi .d { color: var(--ink-soft); }
+
+  footer.pg { padding: 40px 0 64px; }
+  footer.pg .row2 { display: flex; flex-wrap: wrap; gap: 14px 22px; align-items: center; justify-content: space-between; }
+  footer.pg a { color: var(--ink-soft); text-decoration: none; font-family: var(--mono); font-size: 13px; }
+  footer.pg a:hover { color: var(--accent-ink); }
+  footer.pg .fine { color: var(--muted); font-size: 12px; margin-top: 18px; }
+
+  .draftnote { font-family: var(--mono); font-size: 11px; color: var(--gold); border: 1px dashed color-mix(in srgb, var(--gold) 45%, transparent); border-radius: 7px; padding: 2px 7px; display: inline-block; }
+
+  @media (max-width: 680px) {
+    .proof { grid-template-columns: 1fr 1fr; }
+    .princ { grid-template-columns: 1fr; }
+    .row { grid-template-columns: 1fr; gap: 3px; }
+    .row .k { padding-top: 0; }
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .reveal { opacity: 0; transform: translateY(10px); transition: opacity .5s ease, transform .5s ease; }
+    .reveal.in { opacity: 1; transform: none; }
+  }
+</style>
+
+<div class="page">
+  <div class="wrap">
+
+    <header class="hero">
+      <p class="eyebrow">AI Product Manager · Bengaluru, India</p>
+      <div class="name">Harsh Singh</div>
+      <p class="wedge">I turn <span class="u">"is this agent good enough to ship?"</span> into a number — and a <b>gate that blocks the release</b> when it isn't.</p>
+      <p class="sub">Ex-engineer turned PM. I own AI agents end-to-end in production — prompt architecture, evaluation, failure handling, adoption — across voice and messaging. The measurement system I use is open source, and you can run it yourself in about ten seconds.</p>
+
+      <div class="proof">
+        <div class="cell"><div class="v">27%→&lt;12%</div><div class="l">Voice hallucination, eval-driven</div></div>
+        <div class="cell"><div class="v">78%+</div><div class="l">Chats resolved autonomously</div></div>
+        <div class="cell"><div class="v">860</div><div class="l">Paid B2B orgs on what I shipped</div></div>
+        <div class="cell"><div class="v">+40%</div><div class="l">Purchase conversion, A/B tested</div></div>
+      </div>
+
+      <div class="links">
+        <a class="btn primary" href="https://www.linkedin.com/in/harsh-singh-69429a1b1/" target="_blank" rel="noopener">LinkedIn ↗</a>
+        <a class="btn" href="mailto:rickyric395@gmail.com">Email</a>
+        <a class="btn" href="https://github.com/rickyric395/sentinel-eval" target="_blank" rel="noopener">Code ↗</a>
+      </div>
+    </header>
+
+    <section class="blk">
+      <div class="shead"><span class="idx mono">01</span><h2>How I think about AI products</h2></div>
+      <div class="princ">
+        <div class="p reveal"><h3><span class="n">i.</span> Evaluate before you ship</h3><p>Define "good enough" with a metric, not a vibe. A feature that answers differently every run needs a bar you can measure it against — and a way to know when it clears.</p></div>
+        <div class="p reveal"><h3><span class="n">ii.</span> The discipline of no</h3><p>Great PMs are defined as much by what they kill as what they ship. I decline the request that optimizes the wrong metric — even under the pull of urgency.</p></div>
+        <div class="p reveal"><h3><span class="n">iii.</span> Auditability over raw speed</h3><p>When errors have consequences, I choose the architecture I can inspect and debug over the one that's merely fastest. Trust is built in the logs.</p></div>
+        <div class="p reveal"><h3><span class="n">iv.</span> Graceful failure is a feature</h3><p>Agents will hit their limits. A confident hand-off when the model lacks context beats confident nonsense every time — and it's what earns enterprise trust.</p></div>
+      </div>
+    </section>
+
+    <section class="blk">
+      <div class="shead"><span class="idx mono">02</span><h2>Built in the open</h2></div>
+      <div class="cs">
+        <h3>Sentinel — a reliability gate for high-stakes AI agents</h3>
+        <p>The case studies below are work I led on someone else's product. This one is mine, and you can check it:
+        <a href="https://github.com/rickyric395/sentinel-eval" target="_blank" rel="noopener">github.com/rickyric395/sentinel-eval</a>.
+        Clone it, run <span class="mono">npm test</span>, and the whole suite replays offline in about ten seconds with no API key.</p>
+
+        <p>It runs 17 tiered scenarios — happy path, edge, adversarial — against an agent under test, scores each with an
+        LLM judge that is cross-checked by deterministic assertions, reports pass <i>rates</i> over three runs rather than
+        single verdicts, and then <b>exits non-zero when a prompt change makes things worse</b>. The baseline is promoted
+        by hand, on purpose: if the gate could update its own baseline, a slow slide in quality would never trip it.</p>
+
+        <div class="proof">
+          <div class="cell"><div class="v">64.7%→94.1%</div><div class="l">Naive vs tightened prompt, measured</div></div>
+          <div class="cell"><div class="v">+29.4</div><div class="l">Points, from prompt work alone</div></div>
+          <div class="cell"><div class="v">204</div><div class="l">Recorded turns, committed as fixtures</div></div>
+          <div class="cell"><div class="v">0</div><div class="l">Numbers not produced by a real run</div></div>
+        </div>
+
+        <p><b>The finding that surprised me.</b> The naive prompt passed every adversarial scenario it was built to
+        resist — jailbreak, PII disclosure, policy boundary, all at 100% — and failed the mundane ones: writing down a
+        callback time (0%), reading a garbled transcript (0%), handling an angry customer (0%). The tightened prompt
+        closed the edge and adversarial tiers completely, and <i>both</i> of its remaining failures are still on the
+        happy path. Reliability work aimed at attacks would have missed the actual problem entirely.</p>
+
+        <p class="mono" style="font-size:12.5px;opacity:.85">Deliberately not built: multi-turn state, severity
+        weighting, a served UI. Scoping is part of the work, so the repo says so out loud.</p>
+      </div>
+    </section>
+
+    <section class="blk">
+      <div class="shead"><span class="idx mono">03</span><h2>Selected work</h2></div>
+
+      <article class="cs flag reveal">
+        <div class="top">
+          <div><p class="eyebrow">Case study 01 · Voice AI · Trust</p><h3>Making a voice receptionist trustworthy enough to front real calls</h3></div>
+          <span class="impact-badge">27% → &lt;12%</span>
+        </div>
+        <div class="rows">
+          <div class="row"><div class="k">Problem</div><div class="val">A voice agent that hallucinates erodes the very trust it needs to answer inbound calls autonomously. "Sounds fine" wasn't a bar we could ship on.</div></div>
+          <div class="row"><div class="k">Approach</div><div class="val">Manually reviewed transcripts, defined an accuracy metric, rewrote prompts into a constrained, voice-optimized format, and measured before/after on the <span class="n">same 500+</span> transcript set.</div></div>
+          <div class="row"><div class="k">Judgment</div><div class="val">Chose a cascading STT→LLM→TTS pipeline for auditability over a faster speech-to-speech black box — because I had to be able to explain <em>why</em> it said what it said.</div></div>
+          <div class="row impact"><div class="k">Impact</div><div class="val">Cut hallucination <span class="n">27%→&lt;12%</span>; added a fallback-provider failover that held <span class="n">100%</span> voice uptime through a third-party TTS outage.</div></div>
+        </div>
+      </article>
+
+      <article class="cs reveal">
+        <div class="top">
+          <div><p class="eyebrow">Case study 02 · Scale · The discipline of no</p><h3>78% autonomous containment — without runaway token cost</h3></div>
+          <span class="impact-badge">78%+ contained</span>
+        </div>
+        <div class="rows">
+          <div class="row"><div class="k">Problem</div><div class="val">WhatsApp chats never formally "end," so naive context handling meant unbounded token cost as the platform scaled across orgs.</div></div>
+          <div class="row"><div class="k">Approach</div><div class="val">Rejected unbounded context; designed configurable inactivity-based session closure plus summary-memory that rehydrates when a customer returns days later.</div></div>
+          <div class="row"><div class="k">Judgment</div><div class="val">The discipline of no — protected platform scalability over the "keep everything" instinct, trading perfect recall for bounded, predictable economics.</div></div>
+          <div class="row impact"><div class="k">Impact</div><div class="val"><span class="n">78%+</span> of chats resolved autonomously with token cost held in a predictable envelope.</div></div>
+        </div>
+      </article>
+
+      <article class="cs reveal">
+        <div class="top">
+          <div><p class="eyebrow">Case study 03 · 0→1 · Ownership</p><h3>CRM Automations: from zero to 860 paid organizations</h3></div>
+          <span class="impact-badge">1,800+ workflows</span>
+        </div>
+        <div class="rows">
+          <div class="row"><div class="k">Problem</div><div class="val">SMBs needed to automate WhatsApp messages, CRM tasks, and webhooks — without hiring engineers to do it.</div></div>
+          <div class="row"><div class="k">Approach</div><div class="val">Discovery → MVP → a no-code trigger-filter-action builder. Owned the UX, pricing, and sales/support enablement end to end.</div></div>
+          <div class="row"><div class="k">Judgment</div><div class="val">Ruthless sequencing of must-haves vs nice-to-haves to ship a usable v1 fast, then iterate on real usage.</div></div>
+          <div class="row impact"><div class="k">Impact</div><div class="val"><span class="n">1,800+</span> active workflows across <span class="n">860</span> paid organizations.</div></div>
+        </div>
+      </article>
+
+      <article class="cs reveal">
+        <div class="top">
+          <div><p class="eyebrow">Case study 04 · Experimentation · Impact</p><h3>+40% purchase conversion via voice &amp; prompt A/B</h3></div>
+          <span class="impact-badge">+40% conversion</span>
+        </div>
+        <div class="rows">
+          <div class="row"><div class="k">Problem</div><div class="val">Which agent configuration actually makes a business decide to buy the AI receptionist?</div></div>
+          <div class="row"><div class="k">Approach</div><div class="val">Multivariate tests of voice IDs + prompts by business subcategory across <span class="n">1,000+</span> healthcare businesses; measured in SQL/Metabase, validated before/after.</div></div>
+          <div class="row"><div class="k">Judgment</div><div class="val">Let the data pick the winner, then scaled the winning config — rather than trusting a hunch about what "sounds better."</div></div>
+          <div class="row impact"><div class="k">Impact</div><div class="val">Winning configuration lifted product purchase conversion <span class="n">~40%</span> over the prior setup.</div></div>
+        </div>
+      </article>
+    </section>
+
+    <footer class="pg">
+      <div class="row2">
+        <div style="display:flex;flex-wrap:wrap;gap:16px">
+          <a href="https://www.linkedin.com/in/harsh-singh-69429a1b1/" target="_blank" rel="noopener">LinkedIn ↗</a>
+          <a href="mailto:rickyric395@gmail.com">rickyric395@gmail.com</a>
+          <a href="https://github.com/rickyric395/sentinel-eval" target="_blank" rel="noopener">GitHub ↗</a>
+        </div>
+        <span class="mono" style="color:var(--muted);font-size:12px">Harsh Singh · AI PM</span>
+      </div>
+      <p class="fine">Metrics reflect real product work at Superfone (Bengaluru).</p>
+    </footer>
+
+  </div>
+</div>
+
+<script>
+(function () {
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: no-preference)').matches && 'IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, { rootMargin: "0px 0px -8% 0px", threshold: .08 });
+    document.querySelectorAll('.reveal').forEach(function (el) { io.observe(el); });
+  } else {
+    document.querySelectorAll('.reveal').forEach(function (el) { el.classList.add('in'); });
+  }
+  });
+})();
+</script>
