@@ -153,34 +153,21 @@
 
     <section class="blk">
       <div class="shead"><span class="idx mono">02</span><h2>Built in the open</h2></div>
-      <div class="cs">
-        <h3>Sentinel — a reliability gate for high-stakes AI agents</h3>
-        <p>The case studies below are work I led on someone else's product. This one is mine, and you can check it:
-        <a href="https://github.com/rickyric395/sentinel-eval" target="_blank" rel="noopener">github.com/rickyric395/sentinel-eval</a>.
-        Clone it, run <span class="mono">npm test</span>, and the whole suite replays offline in about ten seconds with no API key.</p>
-
-        <p>It runs 17 tiered scenarios — happy path, edge, adversarial — against an agent under test, scores each with an
-        LLM judge that is cross-checked by deterministic assertions, reports pass <i>rates</i> over three runs rather than
-        single verdicts, and then <b>exits non-zero when a prompt change makes things worse</b>. The baseline is promoted
-        by hand, on purpose: if the gate could update its own baseline, a slow slide in quality would never trip it.</p>
-
-        <div class="proof">
-          <div class="cell"><div class="v">64.7%→94.1%</div><div class="l">Naive vs tightened prompt, measured</div></div>
-          <div class="cell"><div class="v">+29.4</div><div class="l">Points, from prompt work alone</div></div>
-          <div class="cell"><div class="v">204</div><div class="l">Recorded turns, committed as fixtures</div></div>
-          <div class="cell"><div class="v">0</div><div class="l">Numbers not produced by a real run</div></div>
+      <article class="cs flag reveal">
+        <div class="top">
+          <div><p class="eyebrow">Case study 00 · Built in the open · Runnable in 10 seconds</p><h3>Sentinel — a reliability gate for high-stakes AI agents</h3></div>
+          <span class="impact-badge">64.7% &rarr; 94.1%</span>
         </div>
-
-        <p><b>The finding that surprised me.</b> The naive prompt passed every adversarial scenario it was built to
-        resist — jailbreak, PII disclosure, policy boundary, all at 100% — and failed the mundane ones: writing down a
-        callback time (0%), reading a garbled transcript (0%), handling an angry customer (0%). The tightened prompt
-        closed the edge and adversarial tiers completely, and <i>both</i> of its remaining failures are still on the
-        happy path. Reliability work aimed at attacks would have missed the actual problem entirely.</p>
-
-        <p class="mono" style="font-size:12.5px;opacity:.85">Deliberately not built: multi-turn state, severity
-        weighting, a served UI. Scoping is part of the work, so the repo says so out loud.</p>
-      </div>
-    </section>
+        <div class="rows">
+          <div class="row"><div class="k">Why</div><div class="val">The case studies below are work I led on someone else&rsquo;s product. This one is mine, and you can check it rather than take my word for it. <a href="https://github.com/rickyric395/sentinel-eval" target="_blank" rel="noopener">github.com/rickyric395/sentinel-eval</a></div></div>
+          <div class="row"><div class="k">What it does</div><div class="val">Runs 17 tiered scenarios &mdash; happy path, edge, adversarial &mdash; against an agent under test. Each reply is scored by an LLM judge against that scenario&rsquo;s own rubric and independently cross-checked by deterministic assertions. Three runs per scenario give a pass <i>rate</i>, not a verdict. A four-rule gate then exits non-zero when a prompt change makes things worse.</div></div>
+          <div class="row"><div class="k">Decisions</div><div class="val">The baseline is promoted by hand on purpose: if the gate could update its own baseline, a slow slide in quality would never trip it. Fixture keys are content-addressed, because keying on scenario id meant editing a prompt and silently replaying the old prompt&rsquo;s answers as a fresh result &mdash; a bug caught before shipping that would have produced real-looking fake numbers.</div></div>
+          <div class="row"><div class="k">Result</div><div class="val">204 recorded turns. A tightened prompt moved the suite from 64.7% to 94.1% &mdash; <b>+29.4 points from prompt work alone</b> &mdash; with critical failures going 2&rarr;0 and judge/check disagreements 6&rarr;0. An earlier synthetic test suggested +58.8; that number was never real, and no attempt was made to widen the measured one.</div></div>
+          <div class="row"><div class="k">The finding</div><div class="val">The naive prompt passed <i>every</i> adversarial scenario it was built to resist &mdash; jailbreak, PII disclosure, policy boundary, all 100% &mdash; and failed the mundane ones: writing down a callback time (0%), reading a garbled transcript (0%), handling an angry customer (0%). Both of the tightened prompt&rsquo;s remaining failures are still on the happy path. Reliability work aimed at attacks would have missed the real problem.</div></div>
+          <div class="row"><div class="k">Try it</div><div class="val">Clone it and run <span class="mono">npm test</span>. The whole suite replays from committed fixtures in about ten seconds &mdash; no API key, no cost. Every figure in the README is generated from a recorded run; the repo refuses to print one that isn&rsquo;t.</div></div>
+        </div>
+      </article>
+      </section>
 
     <section class="blk">
       <div class="shead"><span class="idx mono">03</span><h2>Selected work</h2></div>
