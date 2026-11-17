@@ -4,13 +4,13 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Harsh Singh</title>
-<meta name="description" content="AI product manager in Bengaluru. I build AI agents that answer calls and WhatsApp chats for Indian small businesses.">
+<meta name="description" content="Harsh Singh builds AI agents at Superfone that answer calls and WhatsApps for Indian small businesses.">
 <meta name="robots" content="noindex, nofollow">
 <meta name="theme-color" content="#FFB627" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#1C1252" media="(prefers-color-scheme: dark)">
 <meta property="og:type" content="profile">
 <meta property="og:title" content="Harsh Singh is calling…">
-<meta property="og:description" content="AI product manager. I build AI agents for Indian small businesses. Tap to save my contact.">
+<meta property="og:description" content="Building AI agents at Superfone. Not a loan offer. Tap to save my contact.">
 <meta property="og:url" content="https://rickyric395.github.io/">
 <meta property="og:image" content="https://rickyric395.github.io/og.png">
 <meta property="og:image:width" content="1200">
@@ -72,7 +72,7 @@
   .call {
     max-width: 26rem;
     margin: 0 auto;
-    padding: max(1.25rem, env(safe-area-inset-top)) 1rem 9.5rem;
+    padding: max(1.25rem, env(safe-area-inset-top)) 1rem 11rem;
     text-align: center;
   }
 
@@ -243,14 +243,64 @@
     background: linear-gradient(to bottom, transparent, var(--bg) 1.1rem);
     text-align: center;
   }
+  .dock-row {
+    display: flex;
+    align-items: center;
+    gap: .75rem;
+    max-width: 24rem;
+    margin: 0 auto;
+  }
+  .decline {
+    flex: none;
+    display: grid;
+    place-items: center;
+    width: 3.75rem;
+    height: 3.75rem;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background: #D92D20;
+    color: #fff;
+    cursor: pointer;
+    box-shadow: 0 6px 0 rgba(0, 0, 0, .18);
+  }
+  .decline svg { width: 1.6rem; height: 1.6rem; }
+  .decline:active { transform: translateY(3px); box-shadow: 0 3px 0 rgba(0, 0, 0, .18); }
+  .decline:focus-visible, .answer:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; }
+  .toast {
+    max-width: 24rem;
+    margin: 0 auto .7rem;
+    padding: .6rem .9rem;
+    border-radius: .9rem;
+    background: var(--face);
+    color: var(--face-ink);
+    font-size: .9375rem;
+    font-weight: 600;
+  }
+  .toast:empty { display: none; }
+  @media (prefers-reduced-motion: no-preference) {
+    .toast { animation: pop .2s ease-out; }
+    .nope .face { animation: buzz .6s ease-in-out; }
+  }
+  .tag {
+    display: inline-flex;
+    align-items: center;
+    gap: .35rem;
+    margin: .7rem 0 0;
+    padding: .3rem .75rem .3rem .6rem;
+    border-radius: 999px;
+    background: var(--key);
+    font-size: .875rem;
+    font-weight: 600;
+  }
+  .tag svg { width: 1rem; height: 1rem; color: var(--go); }
   .answer {
+    flex: 1;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: .7rem;
-    max-width: 24rem;
     min-height: 3.75rem;
-    margin: 0 auto;
     border-radius: 999px;
     background: var(--go);
     color: var(--go-ink);
@@ -287,7 +337,8 @@
   </div>
 
   <h1>Harsh Singh</h1>
-  <p class="role">AI product manager in Bengaluru</p>
+  <p class="role">Building AI agents at Superfone, Bengaluru</p>
+  <p class="tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>Verified: not a loan offer</p>
 
   <nav class="keys" aria-label="Reach Harsh">
     <a class="key" href="https://wa.me/918005165727?text=Hi%20Harsh%2C%20we%20met%20at%20the%20summit.">
@@ -304,25 +355,31 @@
     </a>
     <a class="key" href="https://superfone.in/ai-receptionist">
       <span class="key-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M4 10v4M8 7v10M12 4v16M16 7v10M20 10v4"/></svg></span>
-      My work
+      Superfone
     </a>
   </nav>
 
   <section class="transcript" aria-label="About Harsh">
     <p class="t-label"><span class="rec" aria-hidden="true"></span>Live transcript</p>
-    <p class="bubble">Hi! I build AI agents that pick up calls and WhatsApp chats for Indian small businesses, at Superfone.</p>
-    <p class="bubble">I also took our AI receptionist to market and sold it to its first customers myself.</p>
-    <p class="bubble">Before product, I was an engineer at ClearTax.</p>
+    <p class="bubble">Hi! I build AI that answers calls and WhatsApps for Indian small businesses, so the owner can finally eat lunch in peace.</p>
+    <p class="bubble">I sold our first AI receptionists myself, clinics included. Then I handed sales back to the professionals.</p>
+    <p class="bubble">Ex-frontend engineer at ClearTax. Now I build agents, not buttons.</p>
   </section>
 
 </main>
 
 <div class="dock">
+  <p class="toast" id="toast" role="status" aria-live="polite"></p>
+  <div class="dock-row">
+  <button class="decline" id="decline" type="button" aria-label="Decline call">
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 9c-1.6 0-3.1.3-4.6.8v3.1c0 .4-.2.7-.6.9-.9.5-1.8 1-2.5 1.7-.2.2-.4.3-.7.3-.3 0-.5-.1-.7-.3L.3 13c-.2-.2-.3-.4-.3-.7 0-.3.1-.5.3-.7C3.3 8.7 7.4 7 12 7s8.7 1.7 11.7 4.6c.2.2.3.4.3.7 0 .3-.1.5-.3.7l-2.5 2.5c-.2.2-.4.3-.7.3-.3 0-.5-.1-.7-.3-.8-.7-1.6-1.3-2.5-1.7-.3-.2-.6-.5-.6-.9V9.8C15.1 9.3 13.6 9 12 9z"/></svg>
+  </button>
   <a class="answer" href="harsh-singh.vcf">
     <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1l-2.3 2.2z"/></svg>
     Save my contact
   </a>
-  <p class="dock-hint">Adds my number and email to your phone</p>
+  </div>
+  <p class="dock-hint">Adds me to your contacts. No OTP needed.</p>
 </div>
 
 <script>
@@ -345,6 +402,16 @@
     tick();
     setInterval(tick, 1000);
   }
+  var nopes = ['Ouch. Fair enough.', 'Okay, but save the number?'];
+  var nopeCount = 0, toastTimer, toast = document.getElementById('toast');
+  document.getElementById('decline').addEventListener('click', function () {
+    toast.textContent = nopes[nopeCount++ % nopes.length];
+    document.body.classList.remove('nope');
+    void document.body.offsetWidth;
+    document.body.classList.add('nope');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function () { toast.textContent = ''; }, 3000);
+  });
   function wait(ms) { return new Promise(function (r) { setTimeout(r, ms); }); }
 
   if (reduce) {
