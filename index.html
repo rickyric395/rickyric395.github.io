@@ -379,7 +379,7 @@
     Save my contact
   </a>
   </div>
-  <p class="dock-hint">Adds me to your contacts. No OTP needed.</p>
+  <p class="dock-hint" id="hint">Adds me to your contacts. No OTP needed.</p>
 </div>
 
 <script>
@@ -401,6 +401,9 @@
     started = Date.now();
     tick();
     setInterval(tick, 1000);
+  }
+  if (/Android/i.test(navigator.userAgent)) {
+    document.getElementById('hint').textContent = 'Tap, then open the file to save me. No OTP needed.';
   }
   var nopes = ['Ouch. Fair enough.', 'Okay, but save the number?'];
   var nopeCount = 0, toastTimer, toast = document.getElementById('toast');
