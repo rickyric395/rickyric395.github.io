@@ -6,8 +6,7 @@
 <title>Harsh Singh</title>
 <meta name="description" content="Harsh Singh builds AI agents at Superfone that answer calls and WhatsApps for Indian small businesses.">
 <meta name="robots" content="noindex, nofollow">
-<meta name="theme-color" content="#FFB627" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#1C1252" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#FFF6DC">
 <meta property="og:type" content="profile">
 <meta property="og:title" content="Harsh Singh is calling…">
 <meta property="og:description" content="Building AI agents at Superfone. Not a loan offer. Tap to save my contact.">
@@ -16,43 +15,32 @@
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='32' fill='%231C1252'/%3E%3Ctext x='32' y='42' font-family='Arial Black,Arial' font-weight='900' font-size='26' text-anchor='middle' fill='%23FFB627'%3EHS%3C/text%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='32' fill='%23FFC94A'/%3E%3Ctext x='32' y='42' font-family='Arial Black,Arial' font-weight='900' font-size='26' text-anchor='middle' fill='%232A2263'%3EHS%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #FFB627;          /* marigold */
-    --ink: #1C1252;         /* indigo */
-    --ink-soft: rgba(28, 18, 82, .74);
-    --pink: #EE2C7C;        /* rani pink */
-    --go: #138A43;          /* answer green */
+    color-scheme: light;
+    --bg: #FFF6DC;          /* pale marigold */
+    --glow: #FFE29A;        /* soft marigold glow behind the avatar */
+    --ink: #2A2263;         /* soft indigo */
+    --ink-soft: rgba(42, 34, 99, .7);
+    --pink: #F06A9B;
+    --go: #1FA35C;          /* answer green */
     --go-ink: #FFFFFF;
-    --bubble: #FFF4DA;
-    --bubble-ink: #1C1252;
-    --key: rgba(28, 18, 82, .11);
-    --key-hover: rgba(28, 18, 82, .2);
-    --ring: #EE2C7C;
-    --face: #1C1252;
-    --face-ink: #FFB627;
-    --focus: #1C1252;
+    --decline: #F25C54;
+    --bubble: #FFFFFF;
+    --bubble-ink: #2A2263;
+    --key: #FFFFFF;
+    --key-hover: #FFF0C2;
+    --key-line: rgba(42, 34, 99, .1);
+    --ring: #F7A1C0;
+    --face: #FFC94A;
+    --face-ink: #2A2263;
+    --focus: #2A2263;
     --display: "Bagel Fat One", "Arial Black", system-ui, sans-serif;
     --sans: "Instrument Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  }
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --bg: #1C1252;
-      --ink: #FFF4DA;
-      --ink-soft: rgba(255, 244, 218, .74);
-      --bubble: #2D2275;
-      --bubble-ink: #FFF4DA;
-      --key: rgba(255, 244, 218, .1);
-      --key-hover: rgba(255, 244, 218, .18);
-      --ring: #FFB627;
-      --face: #FFB627;
-      --face-ink: #1C1252;
-      --focus: #FFB627;
-    }
   }
 
   * { box-sizing: border-box; }
@@ -61,7 +49,7 @@
     margin: 0;
     min-height: 100vh;
     min-height: 100dvh;
-    background: var(--bg);
+    background: radial-gradient(28rem 22rem at 50% 7.5rem, var(--glow), transparent 70%) no-repeat, var(--bg);
     color: var(--ink);
     font: 400 1rem/1.5 var(--sans);
     -webkit-font-smoothing: antialiased;
@@ -175,6 +163,7 @@
     padding: .7rem .95rem;
     border-radius: 1.15rem 1.15rem 1.15rem .3rem;
     background: var(--bubble);
+    box-shadow: 0 2px 0 var(--key-line);
     color: var(--bubble-ink);
     font-size: 1rem;
     line-height: 1.4;
@@ -227,6 +216,8 @@
     height: 3.75rem;
     border-radius: 50%;
     background: var(--key);
+    border: 1px solid var(--key-line);
+    box-shadow: 0 2px 0 var(--key-line);
     transition: background .15s;
   }
   .key:hover .key-icon { background: var(--key-hover); }
@@ -259,21 +250,21 @@
     padding: 0;
     border: 0;
     border-radius: 50%;
-    background: #D92D20;
+    background: var(--decline);
     color: #fff;
     cursor: pointer;
-    box-shadow: 0 6px 0 rgba(0, 0, 0, .18);
+    box-shadow: 0 5px 0 #C9443D;
   }
   .decline svg { width: 1.6rem; height: 1.6rem; }
-  .decline:active { transform: translateY(3px); box-shadow: 0 3px 0 rgba(0, 0, 0, .18); }
+  .decline:active { transform: translateY(3px); box-shadow: 0 2px 0 #C9443D; }
   .decline:focus-visible, .answer:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; }
   .toast {
     max-width: 24rem;
     margin: 0 auto .7rem;
     padding: .6rem .9rem;
     border-radius: .9rem;
-    background: var(--face);
-    color: var(--face-ink);
+    background: var(--ink);
+    color: #fff;
     font-size: .9375rem;
     font-weight: 600;
   }
@@ -290,6 +281,7 @@
     padding: .3rem .75rem .3rem .6rem;
     border-radius: 999px;
     background: var(--key);
+    border: 1px solid var(--key-line);
     font-size: .875rem;
     font-weight: 600;
   }
@@ -307,10 +299,10 @@
     font-size: 1.1875rem;
     font-weight: 600;
     text-decoration: none;
-    box-shadow: 0 6px 0 rgba(0, 0, 0, .18);
+    box-shadow: 0 5px 0 #17824A;
     transition: transform .1s, box-shadow .1s;
   }
-  .answer:active { transform: translateY(3px); box-shadow: 0 3px 0 rgba(0, 0, 0, .18); }
+  .answer:active { transform: translateY(3px); box-shadow: 0 2px 0 #17824A; }
   .answer svg { width: 1.45rem; height: 1.45rem; }
   @media (prefers-reduced-motion: no-preference) {
     .live .answer svg { animation: buzz 3s ease-in-out 1s infinite; }
