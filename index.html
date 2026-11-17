@@ -46,6 +46,8 @@
   * { box-sizing: border-box; }
   html { -webkit-text-size-adjust: 100%; }
   body {
+    display: flex;
+    flex-direction: column;
     margin: 0;
     min-height: 100vh;
     min-height: 100dvh;
@@ -58,9 +60,11 @@
   a:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; }
 
   .call {
+    flex: 1;
+    width: 100%;
     max-width: 26rem;
     margin: 0 auto;
-    padding: max(1.25rem, env(safe-area-inset-top)) 1rem 11rem;
+    padding: max(.9rem, env(safe-area-inset-top)) 1rem .25rem;
     text-align: center;
   }
 
@@ -78,9 +82,12 @@
   /* The one loud thing: the ringing avatar */
   .avatar {
     position: relative;
-    width: 6.75rem;
-    height: 6.75rem;
-    margin: 2.1rem auto 1.9rem;
+    width: clamp(4.25rem, 10.5vh, 6.5rem);
+    width: clamp(4.25rem, 10.5dvh, 6.5rem);
+    height: clamp(4.25rem, 10.5vh, 6.5rem);
+    height: clamp(4.25rem, 10.5dvh, 6.5rem);
+    margin: clamp(1rem, 3.2vh, 2rem) auto clamp(.9rem, 2.8vh, 1.75rem);
+    margin: clamp(1rem, 3.2dvh, 2rem) auto clamp(.9rem, 2.8dvh, 1.75rem);
   }
   .face {
     position: relative;
@@ -92,7 +99,8 @@
     border-radius: 50%;
     background: var(--face);
     color: var(--face-ink);
-    font: 2.4rem/1 var(--display);
+    font: clamp(1.6rem, 4vh, 2.3rem)/1 var(--display);
+    font: clamp(1.6rem, 4dvh, 2.3rem)/1 var(--display);
     letter-spacing: .02em;
   }
   .ring {
@@ -125,26 +133,28 @@
     position: relative;
     z-index: 2;
     margin: 0;
-    font: 400 clamp(2.5rem, 12.5vw, 3.75rem)/.95 var(--display);
+    font: 400 clamp(2.1rem, min(12vw, 7vh), 3.5rem)/.95 var(--display);
+    font: 400 clamp(2.1rem, min(12vw, 7dvh), 3.5rem)/.95 var(--display);
     letter-spacing: -.01em;
   }
   .role {
-    margin: .6rem 0 0;
-    font-size: 1.0625rem;
+    margin: .4rem 0 0;
+    font-size: 1rem;
     font-weight: 500;
     color: var(--ink-soft);
   }
 
   /* Live transcript */
   .transcript {
-    margin: 1.6rem 0 0;
+    margin: clamp(.9rem, 2.6vh, 1.5rem) 0 0;
+    margin: clamp(.9rem, 2.6dvh, 1.5rem) 0 0;
     text-align: left;
   }
   .t-label {
     display: flex;
     align-items: center;
     gap: .5rem;
-    margin: 0 0 .6rem .25rem;
+    margin: 0 0 .45rem .25rem;
     font-size: .875rem;
     font-weight: 600;
     color: var(--ink-soft);
@@ -158,15 +168,15 @@
   .bubble {
     position: relative;
     width: fit-content;
-    max-width: 92%;
-    margin: 0 0 .5rem;
-    padding: .7rem .95rem;
+    max-width: 96%;
+    margin: 0 0 .4rem;
+    padding: .6rem .9rem;
     border-radius: 1.15rem 1.15rem 1.15rem .3rem;
     background: var(--bubble);
     box-shadow: 0 2px 0 var(--key-line);
     color: var(--bubble-ink);
-    font-size: 1rem;
-    line-height: 1.4;
+    font-size: .9375rem;
+    line-height: 1.38;
   }
   /* Typing reveal only when JS is running; without it every line is visible */
   .js .bubble { visibility: hidden; }
@@ -175,7 +185,7 @@
     content: "";
     position: absolute;
     left: 1rem;
-    top: 1.25rem;
+    top: 1.05rem;
     width: .45rem;
     height: .45rem;
     border-radius: 50%;
@@ -195,14 +205,15 @@
   .keys {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: .5rem;
-    margin: 1.4rem 0 0;
+    gap: .4rem;
+    margin: clamp(.9rem, 2.6vh, 1.4rem) 0 0;
+    margin: clamp(.9rem, 2.6dvh, 1.4rem) 0 0;
   }
   .key {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: .45rem;
+    gap: .35rem;
     text-decoration: none;
     font-size: .8125rem;
     font-weight: 500;
@@ -212,8 +223,10 @@
   .key-icon {
     display: grid;
     place-items: center;
-    width: 3.75rem;
-    height: 3.75rem;
+    width: clamp(3rem, 7.2vh, 3.5rem);
+    width: clamp(3rem, 7.2dvh, 3.5rem);
+    height: clamp(3rem, 7.2vh, 3.5rem);
+    height: clamp(3rem, 7.2dvh, 3.5rem);
     border-radius: 50%;
     background: var(--key);
     border: 1px solid var(--key-line);
@@ -221,17 +234,16 @@
     transition: background .15s;
   }
   .key:hover .key-icon { background: var(--key-hover); }
-  .key svg { width: 1.6rem; height: 1.6rem; }
-  .key-in { font: 600 1.45rem/1 var(--sans); letter-spacing: -.03em; }
+  .key svg { width: 1.45rem; height: 1.45rem; }
+  .key-in { font: 600 1.35rem/1 var(--sans); letter-spacing: -.03em; }
 
   /* The answer button stays on screen */
   .dock {
-    position: fixed;
-    left: 0;
-    right: 0;
+    position: sticky;
     bottom: 0;
-    padding: .9rem 1rem max(1rem, env(safe-area-inset-bottom));
-    background: linear-gradient(to bottom, transparent, var(--bg) 1.1rem);
+    z-index: 10;
+    padding: .6rem 1rem max(.7rem, env(safe-area-inset-bottom));
+    background: linear-gradient(to bottom, transparent, var(--bg) .8rem);
     text-align: center;
   }
   .dock-row {
@@ -245,8 +257,8 @@
     flex: none;
     display: grid;
     place-items: center;
-    width: 3.75rem;
-    height: 3.75rem;
+    width: 3.4rem;
+    height: 3.4rem;
     padding: 0;
     border: 0;
     border-radius: 50%;
@@ -277,8 +289,8 @@
     display: inline-flex;
     align-items: center;
     gap: .35rem;
-    margin: .7rem 0 0;
-    padding: .3rem .75rem .3rem .6rem;
+    margin: .55rem 0 0;
+    padding: .25rem .75rem .25rem .6rem;
     border-radius: 999px;
     background: var(--key);
     border: 1px solid var(--key-line);
@@ -292,7 +304,7 @@
     align-items: center;
     justify-content: center;
     gap: .7rem;
-    min-height: 3.75rem;
+    min-height: 3.4rem;
     border-radius: 999px;
     background: var(--go);
     color: var(--go-ink);
@@ -308,13 +320,14 @@
     .live .answer svg { animation: buzz 3s ease-in-out 1s infinite; }
   }
   .dock-hint {
-    margin: .5rem 0 0;
-    font-size: .8125rem;
+    margin: .35rem 0 0;
+    font-size: .75rem;
     color: var(--ink-soft);
   }
 
-  @media (min-height: 860px) {
-    .avatar { margin-top: 2.75rem; }
+  /* Phones held sideways: let the buttons sit after the content instead of covering it */
+  @media (orientation: landscape) and (max-height: 520px) {
+    .dock { position: static; background: none; padding-bottom: max(1.25rem, env(safe-area-inset-bottom)); }
   }
 </style>
 <script>document.documentElement.classList.add('js');</script>
@@ -329,7 +342,7 @@
   </div>
 
   <h1>Harsh Singh</h1>
-  <p class="role">Building AI agents at Superfone, Bengaluru</p>
+  <p class="role">Building AI agents at Superfone</p>
   <p class="tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>Verified: not a loan offer</p>
 
   <nav class="keys" aria-label="Reach Harsh">
@@ -353,7 +366,7 @@
 
   <section class="transcript" aria-label="About Harsh">
     <p class="t-label"><span class="rec" aria-hidden="true"></span>Live transcript</p>
-    <p class="bubble">Hi! I build AI that answers calls and WhatsApps for Indian small businesses, so the owner can finally eat lunch in peace.</p>
+    <p class="bubble">Hi! I build AI that answers calls and WhatsApps for Indian small businesses, so owners can finally eat lunch in peace.</p>
     <p class="bubble">I sold our first AI receptionists myself, clinics included. Then I handed sales back to the professionals.</p>
     <p class="bubble">Ex-frontend engineer at ClearTax. Now I build agents, not buttons.</p>
   </section>
